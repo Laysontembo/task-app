@@ -1,0 +1,49 @@
+openapi: 3.0.0
+info:
+  title: Student Grades API
+  version: 1.0.0
+
+paths:
+  /students:
+    get:
+      summary: Get all students
+      responses:
+        '200':
+          description: List of students
+
+    post:
+      summary: Create student
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - grade
+              properties:
+                name:
+                  type: string
+                grade:
+                  type: number
+      responses:
+        '201':
+          description: Student created
+        '400':
+          description: Invalid input
+
+  /students/{id}:
+    get:
+      summary: Get student by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Student found
+        '404':
+          description: Student not found
